@@ -1,11 +1,27 @@
 #include "signal.h"
+#include <siginto.h>
+#include <unistd.h>
 
 void catch_sigint(int)
 {
-  // TODO: File this!
-}
+sigset_t blockset;
+sigemptyset(&blockset);
+sigaddset(&blockset,SIGINT);
+sigprocmask(SIG_BLOCK,&blockset,NULL);
 
-void catch_sigtstp(int);
+signal(SIGINT,SIG_IGN);
+sigaction(SIGINT,SIG_IGN,NULL);
+pause();
+Stopped(SIGINT);
+exit(1);
+}
+void catch_sigtstp(int)
 {
-  // TODO: File this!
+signal(SIGTSTP,SIG_IGN);
+sigaction(SIGTSTP,SIGSTOP,NULL);
+Stoppend(SIGTSTP);
+pause();
+exit(0);
+
+
 }
