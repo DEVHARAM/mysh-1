@@ -2,13 +2,13 @@
 CC=gcc -std=c99
 CFLAGS=-I./src -I./include
 LIB=
-OBJ=./src/utils.o ./src/commands.o ./src/built_in.o
+OBJ=./src/utils.o ./src/commands.o ./src/built_in.o  
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 mysh: $(OBJ)
-	$(CC) -o $@ $^ ./src/main.c $(CFLAGS)
+	$(CC) -o $@ $^ ./src/main.c $(CFLAGS) 
 
 # For testing
 CXX=g++ -std=c++11
