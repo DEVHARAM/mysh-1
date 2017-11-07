@@ -9,7 +9,7 @@ sigemptyset(&blockset);
 sigaddset(&blockset,SIGINT);
 sigprocmask(SIG_BLOCK,&blockset,NULL);
 
-signal(SIGINT,SIG_IGN);
+//signal(SIGINT,SIG_IGN);
 sigaction(SIGINT,SIG_IGN,NULL);
 pause();
 Stopped(SIGINT);
