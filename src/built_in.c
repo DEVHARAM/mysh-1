@@ -5,16 +5,21 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <linux/limits.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 #include "built_in.h"
+#include "commands.h"
 
 int do_cd(int argc, char** argv) {
   if (!validate_cd_argv(argc, argv))
-    return -1;
 
+    return -1;
+   
   if (chdir(argv[1]) == -1)
     return -1;
 
+printf("1\n");
   return 0;
 }
 
@@ -35,8 +40,14 @@ int do_pwd(int argc, char** argv) {
 int do_fg(int argc, char** argv) {
   if (!validate_fg_argv(argc, argv))
     return -1;
-
-  // TODO: Fill this.
+	
+	
+		if(in_bg==1){
+			 printf("running %d %s\n",bg,bg_command);
+			fg_check=1;
+			/*waitpid(bg,&status,0);
+			printf("%d done %s",bg,bg_command);*/
+			}
 
   return 0;
 }
